@@ -1,0 +1,41 @@
+<h1>Udemy: Angular: Task 3 (Directives)</h1>
+
+<ol>
+  <li>Add A button which says 'Display Details'</li>
+  <li>
+    Add a paragraph with any content of your choice (e.g. 'Secret Password =
+    tuna')
+  </li>
+  <li>
+    Toggle the displaying of that paragraph with the button created in the first
+    step
+  </li>
+  <li>
+    Log all button clicks in an array and output that array below the secret
+    paragraph (maybe log a timestamp or simply an incrementing number)
+  </li>
+  <li>
+    Starting at the 5th log item, give all future log items a blue background
+    (via ngStyle) and white color (ngClass)
+  </li>
+</ol>
+
+<hr />
+
+<button (click)="handleButtonClick()">Display Details</button>
+<button (click)="handleDeleteArray()">Delete</button>
+<p [ngClass]="{ toggleItem: !showText, secretClass: true }">
+  Secret Password is: %89f=)3j
+</p>
+<ng-container *ngIf="clickEvents.length">
+  <p>Clicked Button at:</p>
+  <ol>
+    <li *ngFor="let clickEvent of clickEvents; index as i">
+      <!-- index is zero-based, that's why: not i >= 5, but i >= 4       -->
+      <!-- 'span' because of white text color & ordered list if 5+ items -->
+      <span [ngClass]="{ fiveTimes: i >= 4 }" [ngStyle]="liStyle(i + 1)">
+        {{ clickEvent | date: 'dd.MM.YYYY@HH:mm`ss' }}s
+      </span>
+    </li>
+  </ol>
+</ng-container>
